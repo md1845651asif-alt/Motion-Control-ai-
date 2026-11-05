@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MotionX AI Studio</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#10101c;color:white;font-family:Arial,sans-serif;padding:20px}
+.container{max-width:650px;margin:auto}
+h1{text-align:center;color:#b99aff}
+.subtitle{text-align:center;color:#aaa}
+.panel{background:#1e1e30;padding:20px;border-radius:16px;margin:18px 0}
+label{display:block;margin:14px 0 8px;font-weight:bold}
+input,select,button{width:100%;padding:13px;border-radius:9px;border:1px solid #444;background:#292940;color:white}
+button{background:#8055dc;border:0;font-weight:bold;margin-top:18px;font-size:16px}
+.preview{width:100%;max-height:300px;object-fit:contain;margin-top:12px;border-radius:10px}
+.note{color:#aaa;font-size:12px;text-align:center}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>✨ MotionX AI</h1>
+<p class="subtitle">AI Motion Transfer Studio</p>
+
+<div class="panel">
+<h3>1. Upload Character Photo</h3>
+<label>Choose Image</label>
+<input type="file" id="photo" accept="image/*">
+<img id="photoPreview" class="preview" hidden>
+
+<h3>2. Upload Reference Video</h3>
+<label>Choose Motion Video</label>
+<input type="file" id="video" accept="video/*">
+<video id="videoPreview" class="preview" controls hidden></video>
+
+<h3>3. Select Motion</h3>
+<select id="motion">
+<option>Dance</option>
+<option>Walking</option>
+<option>Running</option>
+<option>Custom Motion</option>
+</select>
+
+<button onclick="generate()">Generate AI Video ✨</button>
+<p id="status" class="note">Upload your files to begin.</p>
+</div>
+<p class="note">MotionX AI Studio | Prototype Version</p>
+</div>
+
+<script>
+const photo=document.getElementById('photo');
+const video=document.getElementById('video');
+
+photo.onchange=()=>{
+ if(photo.files[0]){
+ const img=document.getElementById('photoPreview');
+ img.src=URL.createObjectURL(photo.files[0]);
+ img.hidden=false;
+ }
+};
+
+video.onchange=()=>{
+ if(video.files[0]){
+ const v=document.getElementById('videoPreview');
+ v.src=URL.createObjectURL(video.files[0]);
+ v.hidden=false;
+ }
+};
+
+function generate(){
+ if(!photo.files[0] || !video.files[0]){
+ alert('Please upload both photo and video!');
+ return;
+ }
+ document.getElementById('status').innerText=
+ 'Files ready! AI Motion Engine is not connected yet.';
+}
+</script>
+</body>
+</html>
